@@ -43,11 +43,31 @@ ui <- navbarPage(
              h3("About Me"),
              p("My name is Shaked and I study Neuroscience. 
              You can reach me at shakedleibovitz@college.harvard.edu."),
-             p(tags$a(href = "https://github.com/Shakedi/gov1005-milestone-3", "connect to Github-milestone-3"))))
+             p(tags$a(href = "https://github.com/Shakedi/gov1005-milestone-3", "connect to Github-milestone-3"))),
+    mainPanel(imageOutput("map")))
+
+
 
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {}
+server <- function(input, output) {
+  output$map <- renderImage({
+    if(input$plot_type == "a"){            
+      list(
+        src = "map.png",
+        width = 720,
+        height = 500,
+        alt = "Median Income in Massachusetts")
+    }                                        
+    else if(input$plot_type == "b"){
+      list(
+        src = "map_2.png",
+        width = 500,
+        height = 500,
+        alt = "Fairfax County Map")
+    }
+  })
+}
 
 # Run the application 
 shinyApp(ui = ui, server = server)
